@@ -1,0 +1,26 @@
+#!/usr/bin/expect
+set arg1 [lindex $argv 0]
+spawn docker exec -it $arg1 bash
+expect {
+	"*" {
+		send "echo start ping\n"
+	}
+}
+send "ping -c 1 www.baidu.com\n"
+set timeout 5
+expect {
+	"icmp_seq=" {
+		send "echo ping is success $arg1\n"
+                send "exit\n"
+		exp_continue
+	}
+	"command not found" {
+		send "echo ping is error $arg1\n"
+		send "exit\n"
+	}
+	timeout {
+		send "echo end\n"
+		send "exit\n"
+		interact
+	}
+}
