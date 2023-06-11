@@ -1,0 +1,10 @@
+3种方式实现http请求
+1、支持get、post、put、delete（options、trace、connect）
+2、支持自定义返回值是否加载到内存，如果不加载，直接在返回处转md5
+3、支持响应提取，在返回后直接进行对应响应的提取
+4、同一个线程里连接复用
+
+支持多种框架发送http、https、socket请求，根本上解决可能出现的性能问题
+1、java自带框架
+2、apache http
+3、okhttp
